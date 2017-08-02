@@ -1,0 +1,27 @@
+{
+    "name": "zohocrm/php-client-library",
+    "description": "Client Library SDK for PHP",
+    "type": "library",
+    "homepage": "https://github.com/zoho/php-client-library",
+    "authors": [
+        {
+            "name": "Sumanth Reddy Chilka",
+            "homepage": "https://www.zoho.com/crm/",
+            "role": "Developer"
+        }
+    ],
+    "license":"Zoho Corp",
+    "require": {
+        "php": ">=5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "ClientLibrary\\": "src"
+        },
+        "files": ["src/index.php"]
+    },
+    "minimum-stability":"stable"
+}
