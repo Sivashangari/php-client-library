@@ -21,7 +21,7 @@ class ZCRMProfileCategory
 
     /**
      * name
-     * @return array
+     * @return string
      */
     public function getName(){
         return $this->name;
@@ -29,7 +29,7 @@ class ZCRMProfileCategory
 
     /**
      * name
-     * @param array $name
+     * @param string $name
      */
     public function setName($name){
         $this->name = $name;
@@ -37,7 +37,7 @@ class ZCRMProfileCategory
 
     /**
      * module
-     * @return array
+     * @return string
      */
     public function getModule(){
         return $this->module;
@@ -45,7 +45,7 @@ class ZCRMProfileCategory
 
     /**
      * module
-     * @param array $module
+     * @param string $module
      */
     public function setModule($module){
         $this->module = $module;
@@ -53,7 +53,7 @@ class ZCRMProfileCategory
 
     /**
      * displayLabel
-     * @return array
+     * @return string
      */
     public function getDisplayLabel(){
         return $this->displayLabel;
@@ -61,7 +61,7 @@ class ZCRMProfileCategory
 
     /**
      * displayLabel
-     * @param array $displayLabel
+     * @param string $displayLabel
      */
     public function setDisplayLabel($displayLabel){
         $this->displayLabel = $displayLabel;
