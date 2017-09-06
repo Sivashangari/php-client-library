@@ -527,6 +527,10 @@ class EntityAPIHandler extends APIHandler
 		$lineItemInstance = ZCRMInventoryLineItem::getInstance($lineItemId);
 		$product = ZCRMRecord::getInstance("Products", $productDetails["id"]+0);
 		$product->setLookupLabel($productDetails["name"]);
+		if(isset($productDetails['Product_Code']))
+		{
+			$product->setFieldValue('Product_Code', $productDetails['Product_Code']);
+		}
 		$lineItemInstance->setProduct($product);
 		$lineItemInstance->setDescription($lineItemDetails["product_description"]);
 		$lineItemInstance->setQuantity($lineItemDetails["quantity"]+0);
