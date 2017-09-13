@@ -548,9 +548,9 @@ class ModuleAPIHandler extends APIHandler
 		if(array_key_exists("auto_number", $fieldDetails) && sizeof($fieldDetails['auto_number'])>0)
 		{
 			$fieldInstance->setAutoNumber(true);
-			$fieldInstance->setPrefix(array_key_exists('prefix', $fieldDetails['formula'])?$fieldDetails['formula']['prefix']:null);
-			$fieldInstance->setSuffix(array_key_exists('suffix', $fieldDetails['formula'])?$fieldDetails['formula']['suffix']:null);
-			$fieldInstance->setStartNumber(array_key_exists('start_number', $fieldDetails['formula'])?$fieldDetails['formula']['start_number']+0:null);
+			$fieldInstance->setPrefix(array_key_exists('prefix', $fieldDetails['auto_number'])?$fieldDetails['auto_number']['prefix']:null);
+			$fieldInstance->setSuffix(array_key_exists('suffix', $fieldDetails['auto_number'])?$fieldDetails['auto_number']['suffix']:null);
+			$fieldInstance->setStartNumber(array_key_exists('start_number', $fieldDetails['auto_number'])?$fieldDetails['auto_number']['start_number']+0:null);
 		}
 		return $fieldInstance;
 	}
