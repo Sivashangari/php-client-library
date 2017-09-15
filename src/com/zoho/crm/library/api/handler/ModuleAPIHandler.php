@@ -306,7 +306,6 @@ class ModuleAPIHandler extends APIHandler
 	 **/
 	public function getZCRMCustomView($customViewDetails,$categoriesArr)
 	{
-		//$customViewDetails=$customViewObj['custom_views'];
 		$customViewInstance=ZCRMCustomView::getInstance($this->module->getAPIName(),$customViewDetails['id']);
 		$customViewInstance->setDisplayValue($customViewDetails['display_value']);
 		$customViewInstance->setDefault((boolean)$customViewDetails['default']);
@@ -322,21 +321,34 @@ class ModuleAPIHandler extends APIHandler
 			$criteriaList=$customViewDetails['criteria'];
 			$criteriaPattern="";
 			$criteriaInstanceArray=array();
-			for($i=0;$i<sizeof($criteriaList);$i++)
+			$criteriaIndex=1;
+			if(isset($criteriaList[0]) && is_array($criteriaList[0]))
 			{
-			$criteria=isset($criteriaList[$i])?$criteriaList[$i]:null;
-			if($criteria==="or" || $criteria==="and")
+				for($i=0;$i<sizeof($criteriaList);$i++)
+				{
+					$criteria=array_values($criteriaList)[$i];
+					if($criteria==="or" || $criteria==="and")
+					{
+						$criteriaPattern=$criteriaPattern.$criteria." ";
+					}
+					else
+					{
+						$criteriaInstance=ZCRMCustomViewCriteria::getInstance();
+						$criteriaInstance->setField($criteria['field']);
+						$criteriaInstance->setValue($criteria['value']);
+						$criteriaInstance->setComparator($criteria['comparator']);
+						$criteriaPattern=$criteriaPattern.$criteriaIndex++." ";
+						array_push($criteriaInstanceArray,$criteriaInstance);
+					}
+				}
+			}
+			else
 			{
-			$criteriaPattern=$criteriaPattern.$criteria;
-			}
-			else {
-			$criteriaInstance=ZCRMCustomViewCriteria::getInstance();
-			$criteriaInstance->setField(isset($criteria['field'])?$criteria['field']:null);
-			$criteriaInstance->setValue(isset($criteria['value'])?$criteria['value']:null);
-			$criteriaInstance->setComparator(isset($criteria['comparator'])?$criteria['comparator']:null);
-			$criteriaPattern=$criteriaPattern.$i;
-			array_push($criteriaInstanceArray,$criteriaInstance);
-			}
+				$criteriaInstance=ZCRMCustomViewCriteria::getInstance();
+				$criteriaInstance->setField($criteriaList['field']);
+				$criteriaInstance->setValue($criteriaList['value']);
+				$criteriaInstance->setComparator($criteriaList['comparator']);
+				array_push($criteriaInstanceArray,$criteriaInstance);
 			}
 			$customViewInstance->setCriteria($criteriaInstanceArray);
 			$customViewInstance->setCriteriaPattern($criteriaPattern);
@@ -344,7 +356,6 @@ class ModuleAPIHandler extends APIHandler
 		
 		if($categoriesArr!=null)
 		{
-			//$customViewCategories=$customViewObj['categories'];
 			$categoryInstanceArray=array();
 			foreach ($categoriesArr as $eachCategory)
 			{
@@ -640,7 +651,7 @@ class ModuleAPIHandler extends APIHandler
 						{
 							$convertMappingFieldIns=ZCRMLeadConvertMappingField::getInstance($field['api_name'], $field['id']+0);
 							$convertMappingFieldIns->setFieldLabel($field['field_label']);
-							$convertMappingFieldIns->setVisible($field['required']);
+							$convertMappingFieldIns->setRequired($field['required']);
 							$convertMapIns->addFields($convertMappingFieldIns);
 						}
 					}

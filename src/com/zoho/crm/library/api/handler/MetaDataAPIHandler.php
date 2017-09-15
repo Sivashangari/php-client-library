@@ -97,7 +97,7 @@ class MetaDataAPIHandler extends APIHandler
 		$zcrmUserInstance=null;
 		if($moduleDetails['modified_by']!=null)
 		{
-			ZCRMUser::getInstance(($moduleDetails['modified_by']["id"]+0),$moduleDetails['modified_by']["name"]);
+			$zcrmUserInstance=ZCRMUser::getInstance(($moduleDetails['modified_by']["id"]+0),$moduleDetails['modified_by']["name"]);
 		}
 		$crmModuleInstance->setModifiedBy($zcrmUserInstance);
 		$crmModuleInstance->setCustomModule('custom'===$moduleDetails['generated_type']);
@@ -164,6 +164,7 @@ class MetaDataAPIHandler extends APIHandler
 		if(array_key_exists('custom_view',$moduleDetails) && $moduleDetails['custom_view']!=null)
 		{
 			$crmModuleInstance->setDefaultCustomView(self::getModuleDefaultCustomView($moduleDetails[APIConstants::API_NAME],$moduleDetails['custom_view']));
+			$crmModuleInstance->setDefaultCustomViewId($moduleDetails['custom_view']['id']+0);
 		}
 		if(array_key_exists('territory',$moduleDetails) && $moduleDetails['territory']!=null)
 		{

@@ -591,5 +591,15 @@ class ZCRMOrganization
 	{
 		return OrganizationAPIHandler::getInstance()->createUser($userInstance);
 	}
+	
+	public function updateUser($userInstance)
+	{
+		return OrganizationAPIHandler::getInstance()->updateUser($userInstance);
+	}
+	
+	public function deleteUser($userId)
+	{
+		return OrganizationAPIHandler::getInstance()->deleteUser($userId);
+	}
 }
 ?>

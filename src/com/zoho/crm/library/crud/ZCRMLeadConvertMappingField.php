@@ -5,7 +5,7 @@ class ZCRMLeadConvertMappingField
 	private $apiName;
 	private $id;
 	private $fieldLabel;
-	private $visible;
+	private $required;
 	private function __construct($apiName,$id)
 	{
 		$this->apiName=$apiName;
@@ -69,16 +69,16 @@ class ZCRMLeadConvertMappingField
      * visible
      * @return Boolean
      */
-    public function isVisible(){
-        return $this->visible;
+    public function isRequired(){
+        return $this->required;
     }
 
     /**
      * visible
      * @param Boolean $visible
      */
-    public function setVisible($visible){
-        $this->visible = $visible;
+    public function setRequired($visible){
+        $this->required = $visible;
     }
 
 }

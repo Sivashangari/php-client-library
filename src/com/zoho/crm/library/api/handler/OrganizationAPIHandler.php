@@ -173,10 +173,10 @@ class OrganizationAPIHandler extends APIHandler
 			throw $exception;
 		}
 	}
-	public function deleteUser($userInstance)
+	public function deleteUser($userId)
 	{
 		try{
-			$this->urlPath="users/".$userInstance->getId();
+			$this->urlPath="users/".$userId;
 			$this->requestMethod=APIConstants::REQUEST_METHOD_DELETE;
 			$this->addHeader("Content-Type","application/json");
 			$this->apiKey='users';
@@ -291,14 +291,6 @@ class OrganizationAPIHandler extends APIHandler
 			if($user->getTimeZone()!=null)
 			{
 				$userInfoJson['time_zone']=$user->getTimeZone();
-			}
-			if($user->isConfirm()!=null)
-			{
-				$userInfoJson['confirm']=(boolean)$user->isConfirm();
-			}
-			if($user->getFullName()!=null)
-			{
-				$userInfoJson['full_name']=$user->getFullName();
 			}
 			if($user->getPhone()!=null)
 			{
