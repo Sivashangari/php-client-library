@@ -544,7 +544,10 @@ class ModuleAPIHandler extends APIHandler
 		{
 			$fieldInstance->setFormulaField(true);
 			$fieldInstance->setFormulaReturnType($fieldDetails['formula']['return_type']);
-			$fieldInstance->setFormulaExpression($fieldDetails['formula']['expression']);
+			if(isset($fieldDetails['formula']['expression']))
+			{
+				$fieldInstance->setFormulaExpression($fieldDetails['formula']['expression']);
+			}
 		}
 		if(array_key_exists("currency", $fieldDetails) && sizeof($fieldDetails['currency'])>0)
 		{

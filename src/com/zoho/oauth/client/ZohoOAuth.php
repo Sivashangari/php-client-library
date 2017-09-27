@@ -31,7 +31,7 @@ class ZohoOAuth
 					self::$configProperties[$key]=$value;
 				}
 			}
-			self::$configProperties[ZohoOAuthConstants::IAM_URL]= "https://accounts.localzoho.com";
+			self::$configProperties[ZohoOAuthConstants::IAM_URL]= "https://accounts.zoho.com";
 			$oAuthParams=new ZohoOAuthParams();
 			
 			$oAuthParams->setAccessType(self::getConfigValue(ZohoOAuthConstants::ACCESS_TYPE));
