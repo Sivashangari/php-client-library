@@ -57,7 +57,7 @@ class ModuleAPIHandlerTest
 					{
 						throw new ZCRMException("Invalid Field Data Received");
 					}
-					if(!is_bool($zcrmField->isCustomField()) || !is_bool($zcrmField->isVisible()) || !is_bool($zcrmField->isReadOnly()) || !is_bool($zcrmField->isBusinessCardSupported()) || !is_string($zcrmField->getFieldLabel()) || !is_long($zcrmField->getId()) || !is_string($zcrmField->getApiName()) || !is_integer($zcrmField->getLength()) || !is_string($zcrmField->getCreatedSource()) || !is_string($zcrmField->getDataType()) || ($moduleName!='Events' && $zcrmField->getJsonType()==null))
+					if(!is_bool($zcrmField->isCustomField()) || !is_bool($zcrmField->isVisible()) || !is_bool($zcrmField->isReadOnly()) || !is_bool($zcrmField->isBusinessCardSupported()) || !is_string($zcrmField->getFieldLabel()) || !is_long($zcrmField->getId()) || !is_string($zcrmField->getApiName()) || !is_integer($zcrmField->getLength()) || !is_string($zcrmField->getCreatedSource()) || !is_string($zcrmField->getDataType()) || (!(TestUtil::isActivityModule($moduleName) || $moduleName=='Activities') && $zcrmField->getJsonType()==null))
 					{
 						throw new ZCRMException("Field details not fetched properly");
 					}

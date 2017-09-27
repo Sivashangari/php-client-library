@@ -101,7 +101,7 @@ class MetaDataAPIHandlerTest
 					Helper::writeToFile(self::$filePointer,Main::getCurrentCount(),'ZCRMRestClient','getModule('.$moduleName.')','Invalid Response','Response status code is not as expected('.$moduleResponse->getHttpStatusCode().')','failure',($endTime-$startTime));
 					continue;
 				}
-				if($zcrmModule->getId()==null || $zcrmModule->getModuleName()==null || $zcrmModule->getAPIName()==null ||$zcrmModule->getSingularLabel()==null ||$zcrmModule->getPluralLabel()==null || !is_bool($zcrmModule->isCustomModule()) || !is_bool($zcrmModule->isCreatable()) || !is_bool($zcrmModule->isConvertable()) || !is_bool($zcrmModule->isEditable()) || !is_bool($zcrmModule->isDeletable()) || !is_bool($zcrmModule->isViewable()) || !is_bool($zcrmModule->isApiSupported()) || !is_bool($zcrmModule->isScoringSupported()) || !is_integer($zcrmModule->getBusinessCardFieldLimit()) || !is_integer($zcrmModule->getBusinessCardFieldLimit()) || !is_bool($zcrmModule->isGlobalSearchSupported()) ||  !is_integer($zcrmModule->getSequenceNumber()))
+				if($zcrmModule->getId()==null || $zcrmModule->getModuleName()==null || $zcrmModule->getAPIName()==null ||$zcrmModule->getSingularLabel()==null ||$zcrmModule->getPluralLabel()==null || !is_bool($zcrmModule->isCustomModule()) || !is_bool($zcrmModule->isCreatable()) || !is_bool($zcrmModule->isConvertable()) || !is_bool($zcrmModule->isEditable()) || !is_bool($zcrmModule->isDeletable()) || !is_bool($zcrmModule->isViewable()) || !is_bool($zcrmModule->isApiSupported()) || !is_bool($zcrmModule->isScoringSupported()) || !is_integer($zcrmModule->getBusinessCardFieldLimit()) ||  !is_integer($zcrmModule->getSequenceNumber()))
 				{
 					Helper::writeToFile(self::$filePointer,Main::getCurrentCount(),'ZCRMRestClient','getModule('.$moduleName.')','Invalid Response','Module fields data not fetched properly','failure',($endTime-$startTime));
 					continue;
@@ -127,8 +127,7 @@ class MetaDataAPIHandlerTest
 						break;
 					}
 				}
-				
-				if(!is_array($zcrmModule->getProperties()))
+				if(!is_array($zcrmModule->getProperties()) && !$moduleName=='Approvals')
 				{
 					Helper::writeToFile(self::$filePointer,Main::getCurrentCount(),'ZCRMRestClient','getModule('.$moduleName.')','Invalid Response','Module properties not fetched properly','failure',($endTime-$startTime));
 					continue;
@@ -149,7 +148,7 @@ class MetaDataAPIHandlerTest
 				$fieldArray=array();
 				foreach ($rawFieldArray as $field)
 				{
-					if(!is_bool($field->isCustomField()) || !is_bool($field->isVisible()) || !is_bool($field->isReadOnly()) || !is_bool($field->isBusinessCardSupported()) || !is_string($field->getFieldLabel()) || !is_long($field->getId()) || !is_string($field->getApiName()) || !is_integer($field->getLength()) || !is_string($field->getCreatedSource()) || !is_string($field->getDataType()) || ($moduleName!='Events' && $field->getJsonType()==null))
+					if(!is_bool($field->isCustomField()) || !is_bool($field->isVisible()) || !is_bool($field->isReadOnly()) || !is_bool($field->isBusinessCardSupported()) || !is_string($field->getFieldLabel()) || !is_long($field->getId()) || !is_string($field->getApiName()) || !is_integer($field->getLength()) || !is_string($field->getCreatedSource()) || !is_string($field->getDataType()) || (!(TestUtil::isActivityModule($moduleName) || $moduleName=='Activities') && $field->getJsonType()==null))
 					{
 						Helper::writeToFile(self::$filePointer,Main::getCurrentCount(),'ZCRMRestClient','getModule('.$moduleName.')','Invalid Response','Module Field details not fetched properly','failure',($endTime-$startTime));
 						break;
